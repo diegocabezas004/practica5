@@ -1,5 +1,6 @@
 import { useAppStore } from "../store/useAppStore";
 import { useEffect, useState } from "react";
+import {useNotificationStore} from "../store/useNotificationStore";
 
 export default function SearchForm() {
 
@@ -13,7 +14,7 @@ export default function SearchForm() {
         e.preventDefault();
 
         if(Object.values(searchFilters).includes('')){
-            console.log('Todos los campos son obligatorios')
+            addNotification('Todos los campos son requeridos', 'error');
             return
     }
         searchRecipes(searchFilters);
@@ -28,6 +29,7 @@ export default function SearchForm() {
     
     const fetchCategories = useAppStore((state)=>state.fetchCategories);
     const categories = useAppStore((state)=>state.categories);
+    const addNotification = useNotificationStore((state)=>state.addNotification);
 
     useEffect(()=>{
         fetchCategories()

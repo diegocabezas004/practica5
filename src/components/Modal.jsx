@@ -1,9 +1,12 @@
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { Fragment } from "react";
 import { useAppStore } from "../store/useAppStore";
+import { useNotificationStore } from "../store/useNotificationStore";
 
 export default function Modal() {
     const modal=useAppStore((state)=>state.modal)
+
+    const addNotification = useNotificationStore((state) => state.addNotification);
 
     const closeModal=useAppStore((state)=>state.closeModal)
 
@@ -27,7 +30,15 @@ export default function Modal() {
             }
         }
         return ingredients
-    }
+    };
+
+    const handleFavorite=()=>{
+            const accion = favoriteExists(selectedRecipe.idDrink) ? 'eliminado' : 'agregado'
+            handleClickFavorite(selectedRecipe);
+            addNotification(`Bebida ${accion} a favoritos`, 'completado');
+            closeModal();
+        };
+
     return (
         <>
             <Transition appear show={modal} as={Fragment}>
@@ -75,6 +86,7 @@ export default function Modal() {
                                         <button type="button" onClick={()=>{
                                             handleClickFavorite(selectedRecipe)
                                             closeModal()
+                                            handleFavorite()
                                         }}
                                         className="w-full rounded bg-orange-600 p-3 font-bold uppercase text-white shadow hover:bg-orange-500"
                                         >
