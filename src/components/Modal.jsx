@@ -1,7 +1,7 @@
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import { Fragment } from "react";
 import { useAppStore } from "../store/useAppStore";
-import { useNotificationStore } from "../store/useNotificationStore";
+import { useNotificationStore } from "../store/notificationSlice";
 
 export default function Modal() {
     const modal=useAppStore((state)=>state.modal)

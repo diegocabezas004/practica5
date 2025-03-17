@@ -1,6 +1,6 @@
 import { useAppStore } from "../store/useAppStore";
 import { useEffect, useState } from "react";
-import {useNotificationStore} from "../store/useNotificationStore";
+import {useNotificationStore} from "../store/notificationSlice";
 
 export default function SearchForm() {
 
